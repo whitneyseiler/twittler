@@ -31,42 +31,50 @@
         <button class="refresh">See New Tweets</button>
         <div id="tweet-container">
           <script>
+
           $(document).ready(function() {
-            var $tweetBody = $('#tweet-container');
-            streams.lastRead = 0;
-            var updateTweets = function() {
-              var index = streams.lastRead;
-              streams.lastRead = streams.home.length;
-              while (index < streams.home.length) {
+            var $feed = $('#tweet-container');
+            index = 0;
+            function showTweets() {
+              var index = streams.home.length-1;
+              while (index >= 0) {
                 var tweet = streams.home[index];
-                var $tweet = $('<div></div>');
+                var $tweet = $('<div></div>').addClass('tweet');
+
                 if (tweet !== undefined) {
-                  $tweet.text('@' + tweet.user + ': ' + tweet.message);
-                  $tweetBody.prepend($tweet);
-                  index += 1;
+                  $tweet.append('<a href="#" class="user">@' + tweet.user + '</a>: ' + tweet.message + ' - ' + jQuery.timeago(tweet.created_at));
+                  $feed.prepend($tweet);
+                  index -= 1;
                 }
               }
-              //setTimeout(updateTweets, 5000);
             }
-            updateTweets();
-            //Event listeners
+            showTweets();
+
+            //refresh button
             $('.refresh').on('click', function() {
-              updateTweets();
+              showTweets();
             });
-            $('.user').on('click', function() {
-              var name = $(this).text();
-              $tweetBody.html('');
-              for (var i = 0; i < streams.home.length; i++) {
-                var tweet = streams.home[i];
-                if (tweet.user === name) {
-                  var $tweet = $('<div></div>');
-                  $tweet.text('[' + tweet.created_at + '] @' + tweet.user + ': ' + tweet.message);
-                  $tweetBody.prepend($tweet);
+
+            //user's unique feed
+            $('tweet.user').on('click', function (user) {
+              var user = $(this).html();
+              var index = streams.users.length-1;
+              while (index >= 0) {
+                if('@' + tweet.user === user){
+                  var tweet = streams.users[user][index];
+                  var $tweet = $('<div></div>').addClass('tweet');
+
+                  if (tweet !== undefined) {
+                    $tweet.append('<a href="#" class="user">@' + user + '</a>: ' + tweet.message + ' - ' + jQuery.timeago(tweet.created_at));
+                    $feed.prepend($tweet);
+                    index -= 1;
+                  }
                 }
               }
             });
+
             $('.home').on('click', function() {
-              $tweetBody.html('');
+              $feed.html('');
               streams.lastRead = 0;
               updateTweets();
             });
