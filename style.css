@@ -45,27 +45,25 @@ h2 {
   color: grey;
 }
 #main {
-  padding: 14px;
+  padding: 20px;
 }
 
 #timeline {
   background-color: white;
   height: 100%;
-  padding: 14px 14px 14px 14px;
+  padding: 20px 20px 20px 30px;
   margin: 0;
   position: relative;
 }
 
 #tweet-container {
-	padding: 14px 14px 14px 14px;
+	padding: 20px 20px 20px 20px;
 }
 
 .tweet {
 	background: White;
-  border-color: black;
-	border-radius: 5px;
 	color: Gray;
-	font-family: Helvetica, Sans-serif;
+	font-family: Helvetica Neue;
 	font-size: 14px;
 	margin: 0px 10px 10px 10px;
 	padding: 5px;
@@ -82,13 +80,6 @@ h2 {
 	color: #ffae1c;
 }
 
-.created-at {
-	text-align: right;
-	color: rgba(255, 255, 255, .5);
-}
-
 .message {
-  background: #EFF;
-  border-radius: 10px;
   line-height: 20px;
-} */
+}
