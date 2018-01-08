@@ -68,8 +68,8 @@
 
                   $tweet.append('<a href="#" class="user">' + user + '</a>: ' + tweet + ' - ' + jQuery.timeago(streams.home[index].created_at));
                   $('#tweet-container').prepend($tweet);
-                  index -= 1;
                 }
+              index -= 1;
               }
             });
 
