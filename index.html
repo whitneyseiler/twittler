@@ -43,7 +43,7 @@
 
                 if (tweet !== undefined) {
                   $tweet.append('<a href="#" class="user">@' + tweet.user + '</a>: ' + tweet.message + ' - ' + jQuery.timeago(tweet.created_at));
-                  $feed.prepend($tweet);
+                  $feed.append($tweet);
                   index -= 1;
                 }
               }
@@ -52,30 +52,29 @@
 
             //refresh button
             $('.refresh').on('click', function() {
+              $('#tweet-container').html('');
               showTweets();
             });
 
             //user's unique feed
             $('#tweet-container').on('click', '.user', function (user) {
+              $('#tweet-container').empty();
               var user = $(this).html();
-              $('#tweet-container').empty
-              var index = streams.users.length-1;
+              var index = streams.home.length-1;
               while (index >= 0) {
-                if('@' + tweet.user === user){
-                  var tweet = streams.users[user][index];
+                if(streams.home[index].user === user.slice(1)){
+                  var tweet = streams.home[index].message;
                   var $tweet = $('<div></div>').addClass('tweet');
 
-                  if (tweet !== undefined) {
-                    $tweet.append('<a href="#" class="user">@' + user + '</a>: ' + tweet.message + ' - ' + jQuery.timeago(tweet.created_at));
-                    $tweet-container.prepend($tweet);
-                    index -= 1;
-                  }
+                  $tweet.append('<a href="#" class="user">' + user + '</a>: ' + tweet + ' - ' + jQuery.timeago(streams.home[index].created_at));
+                  $('#tweet-container').prepend($tweet);
+                  index -= 1;
                 }
               }
             });
 
             $('.home').on('click', function() {
-              $tweet-container.html('');
+              $('#tweet-container').html('');
               showTweets();
             });
           });
